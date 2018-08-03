@@ -1,0 +1,24 @@
+{
+    "name": "Sprint-Challenge-Node-Express",
+    "version": "1.0.0",
+    "main": "server.js",
+    "repository": "https://github.com/Michael-Real/Sprint-Challenge-Node-Express.git",
+    "license": "MIT",
+    "scripts": {
+      "start": "nodemon server.js"
+    },
+    "devDependencies": {
+      "nodemon": "^1.18.3"
+    },
+    "dependencies": {
+      "axios": "^0.18.0",
+      "cors": "^2.8.4",
+      "express": "^4.16.3",
+      "helmet": "^3.13.0",
+      "knex": "^0.15.2",
+      "morgan": "^1.9.0",
+      "script": "^0.1.4",
+      "sqlite3": "^4.0.2",
+      "start": "^5.1.0"
+    }
+  }

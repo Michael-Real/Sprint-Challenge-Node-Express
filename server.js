@@ -2,8 +2,8 @@ const express = require('express');
 const cors = require('cors');
 const helmet = require('helmet');
 const morgan = require('morgan');
-const actionRoute = require('./data/routes/actions');
-const projectRoute = require('./data/routes/project');
+const actions = require('./data/routes/actions');
+const project = require('./data/routes/project');
 
 const server = express();
 

@@ -3,6 +3,7 @@ const express = require('express');
 const router = express.Router();
 
 //GET
+
 router.get('/', (req, res) => {
     project.get()
         .then(response => {
@@ -14,7 +15,8 @@ router.get('/', (req, res) => {
 })
 
 router.get('/:id', (req, res) => {
-    project.get(req.params.id)
+    const id = req.params.id;
+    project.get(id)
         .then(response => {
           if(!response) {
             res.status(404).json({ msg: 'Project with specified ID not found' });
@@ -27,7 +29,8 @@ router.get('/:id', (req, res) => {
 })
 
 router.get('/:id/actions', (req, res) => {
-    project.getProjectActions(req.params.id)
+    const id = req.params.id;
+    project.getProjectActions(id)
         .then(response => {
           if(!response) {
             res.status(404).json({ msg: "Project with specified ID not found" });
@@ -58,7 +61,8 @@ router.post("/", (req, res) => {
 //DELETE
 
 router.delete('/:id', (req, res) => {
-    project.remove(req.params.id)
+    const id = req.params.id;
+    project.remove(id)
         .then(response => {
           if(!response) {
             res.status(404).json({ err: 'Project with specified ID not found' });
@@ -71,5 +75,23 @@ router.delete('/:id', (req, res) => {
 })
 
 //PUT
+
+router.put('/:id', (req, res) => {
+    const { name, description } = req.body;
+    const id = req.params.id;
+    if(!name || !description) {
+        res.status(400).json({ err: 'Missing name and description' });
+}
+    project.update(id, { name, description })
+        .then(response => {
+          if(response === null) {
+            res.status(404).json({ err: 'Project with specified id not found' });
+        }
+            res.status(200).json({ name, description });
+    })
+        .catch(err => {
+            res.status(500).json({ err: 'Failed to update project' });
+    })
+})
 
 module.exports = router;

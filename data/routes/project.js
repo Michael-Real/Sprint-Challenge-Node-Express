@@ -41,6 +41,20 @@ router.get('/:id/actions', (req, res) => {
 
 //POST
 
+router.post("/", (req, res) => {
+    const { name, description } = req.body;
+    if(!name || !description) {
+        res.status(400).json({ err: 'Missing name and description' });
+    }
+    project.insert({ name, description })
+        .then(response => {
+            res.status(201).json({ name, description });
+    })
+        .catch(err => {
+            res.status(500).json({ err: 'Failed to post project' });
+    })
+})
+
 //DELETE
 
 //PUT

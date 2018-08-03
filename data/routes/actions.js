@@ -27,7 +27,22 @@ router.get('/:id', (req, res) => {
             res.status(500).json({ err: 'Failed to get action'});
     })
 })
+
 //POST
+
+router.post('/', (req, res) => {
+    const { project_id, description, notes } = req.body;
+    if(!project_id || !description || !notes) {
+        res.status(400).json({ err: 'Missing required body content'});
+    }
+    actions.insert({ project_id, description, notes })
+        .then(response => {
+            res.status(201).json({ project_id, description, notes });
+    })
+        .catch(err => {
+            res.status(500).json({ err: 'Failed to post action' });
+    })
+})
 
 //DELETE
 
